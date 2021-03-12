@@ -11,14 +11,19 @@ CREATE TABLE "user" (
   "hire_date" date,
   "paid_time_off" int,
   "user_status" varchar,
-  "created_at" timestamp,
-  "deleted" boolean
+  "date_created" timestamp,
+  "date_deleted" timestamp,
+  "is_deleted" boolean,
+  "role" varchar
 );
 
 CREATE TABLE "role" (
   "id" SERIAL PRIMARY KEY,
   "name" varchar,
-  "description" varchar
+  "description" varchar,
+  "date_created" timestamp,
+  "date_deleted" timestamp,
+  "is_deleted" boolean
 );
 
 CREATE TABLE "department" (
@@ -26,7 +31,10 @@ CREATE TABLE "department" (
   "name" varchar,
   "description" varchar,
   "department_leader" varchar,
-  "parent_department" int
+  "parent_department" int,
+  "date_created" timestamp,
+  "date_deleted" timestamp,
+  "is_deleted" boolean
 );
 
 CREATE TABLE "request_permisson" (
@@ -37,7 +45,10 @@ CREATE TABLE "request_permisson" (
   "to_date" date,
   "business_days" int,
   "request_type" varchar,
-  "request_status" varchar
+  "request_status" varchar,
+  "date_created" timestamp,
+  "date_deleted" timestamp,
+  "is_deleted" boolean
 );
 
 CREATE TABLE "holiday" (
@@ -45,7 +56,10 @@ CREATE TABLE "holiday" (
   "name" varchar,
   "description" varchar,
   "date" date,
-  "is_active" boolean
+  "is_active" boolean,
+  "date_created" timestamp,
+  "date_deleted" timestamp,
+  "is_deleted" boolean
 );
 
 ALTER TABLE "user" ADD FOREIGN KEY ("id") REFERENCES "role" ("id");
