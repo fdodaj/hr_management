@@ -32,12 +32,12 @@ CREATE TABLE "department" (
 CREATE TABLE "request_permisson" (
   "id" SERIAL PRIMARY KEY,
   "name" varchar,
-  "description" varchar,
+  "reason" varchar,
   "from_date" date,
   "to_date" date,
   "business_days" int,
   "request_type" varchar,
-  "request_status" boolean
+  "request_status" varchar
 );
 
 CREATE TABLE "holiday" (
