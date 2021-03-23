@@ -1,16 +1,20 @@
 from rest_framework import serializers
-from .models import User, Department
+from .models import User, Department, Holiday
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'first_name', 'last_name', 'email', 'password',
-                  'date_created', 'hire_date',
-                  'is_deleted']
+        fields = '__all__'
 
 
 class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department
+        fields = '__all__'
+
+
+class HolidaySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Holiday
         fields = '__all__'

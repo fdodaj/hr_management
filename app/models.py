@@ -19,7 +19,6 @@ class Role(models.Model):
 
 
 class User(models.Model):
-    id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
@@ -66,7 +65,7 @@ class Holiday(models.Model):
 
 class Department(models.Model):
     name = models.CharField(max_length=255)
-    users = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_department', )
+    users = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_department')
     department_leader = models.ForeignKey(User, on_delete=models.CASCADE, related_name='department_leader')
     date_created = models.DateField(auto_now=True)
     is_deleted = models.BooleanField(default=False)

@@ -9,5 +9,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('app.user_api')),
     path('department/', include('app.department_url')),
+    path('holiday/', include('app.holiday_api')),
     path('', schema_view),
 ]
