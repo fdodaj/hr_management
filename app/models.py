@@ -1,5 +1,3 @@
-from django.contrib.auth.base_user import AbstractBaseUser
-from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 
 
@@ -50,25 +48,6 @@ class Permission(models.Model):
         return self.description
 
 
-class Holiday(models.Model):
-    name = models.CharField(max_length=255)
-    description = models.CharField(max_length=255)
-    from_date = models.DateField()
-    to_date = models.DateField()
-    date_created = models.DateField(auto_now=True)
-    is_active = models.BooleanField(default=True)
-    is_deleted = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.name
 
 
-class Department(models.Model):
-    name = models.CharField(max_length=255)
-    users = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_department')
-    department_leader = models.ForeignKey(User, on_delete=models.CASCADE, related_name='department_leader')
-    date_created = models.DateField(auto_now=True)
-    is_deleted = models.BooleanField(default=False)
 
-    def __str__(self):
-        return self.name

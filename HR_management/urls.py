@@ -7,8 +7,8 @@ schema_view = get_swagger_view(title='app')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('user/', include('app.user_api')),
-    path('department/', include('app.department_url')),
-    path('holiday/', include('app.holiday_api')),
+    path('user/', include('app.urls')),
+    path('department/', include('department.urls')),
+    path('holiday/', include('holiday.urls')),
     path('', schema_view),
 ]

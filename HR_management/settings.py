@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     'rest_framework',
     'app',
+    'department',
+    'holiday',
 ]
 
 REST_FRAMEWORK = {'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'}
