@@ -6,3 +6,5 @@ from .models import Holiday
 class HolidayList(generics.ListCreateAPIView):
     queryset = Holiday.objects.all()
     serializer_class = serializers.HolidaySerializer
+
+
