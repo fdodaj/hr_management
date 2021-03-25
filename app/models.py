@@ -7,7 +7,7 @@ class Role(models.Model):
         ('Department_manager', 'Department_manager'),
         ('User', 'User')
     )
-    role = models.CharField(max_length=255, choices=ROLES)
+    role = models.CharField(max_length=255, choices=ROLES, default='User')
     date_created = models.DateField(auto_now=True)
     date_deleted = models.DateField(blank=True, null=True)
     is_deleted = models.BooleanField(default=False)
@@ -30,6 +30,9 @@ class User(models.Model):
     def __str__(self):
         return self.first_name + self.last_name
 
+    def __str__(self):
+        return self.role
+
 
 class Permission(models.Model):
     STATUS = (
@@ -46,8 +49,3 @@ class Permission(models.Model):
 
     def __str__(self):
         return self.description
-
-
-
-
-

@@ -4,6 +4,8 @@ from . import views
 
 urlpatterns = [
     path('', views.HolidayList.as_view()),
+    path('holiday/<int:pk>',views.HolidayDetail.as_view()),
+    path('<int:pk>', views.UpdateHoliday.as_view()),
 
 ]
 

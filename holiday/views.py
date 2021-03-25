@@ -8,3 +8,11 @@ class HolidayList(generics.ListCreateAPIView):
     serializer_class = serializers.HolidaySerializer
 
 
+class UpdateHoliday(generics.UpdateAPIView):
+    queryset = Holiday.objects.all()
+    serializer_class = serializers.HolidaySerializer
+
+
+class HolidayDetail(generics.RetrieveAPIView):
+    queryset = Holiday.objects.all()
+    serializer_class = serializers.UpdateHolidaySerializer
