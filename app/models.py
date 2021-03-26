@@ -33,6 +33,9 @@ class User(models.Model):
     def __str__(self):
         return self.role
 
+    def delete(self, using=None, keep_parents=False):
+        pass
+
 
 class Permission(models.Model):
     STATUS = (
