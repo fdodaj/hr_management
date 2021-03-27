@@ -22,7 +22,7 @@ class ListUser(generics.ListAPIView):
 
 class UserDetail(RetrieveAPIView):
     queryset = User.objects.all()
-    serializer_class = serializers.ListUserSerializer
+    serializer_class = serializers.UserDetailSerializer
 
     def get_queryset(self):
         user = self.request.user
@@ -42,3 +42,13 @@ class UserDestroyAPIView(DestroyAPIView):
     def perform_destroy(self, instance):
         instance.is_deleted = True
         instance.save()
+
+
+class UserPasswordView(RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = serializers.UserPasswordSerializer
+
+
+class UpdatePasswordView(UpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = serializers.UpdatePasswordSerializer

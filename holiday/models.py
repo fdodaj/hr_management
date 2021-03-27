@@ -7,7 +7,7 @@ class Holiday(models.Model):
     from_date = models.DateField()
     to_date = models.DateField()
     date_created = models.DateField(auto_now=True)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
     is_deleted = models.BooleanField(default=False)
 
     def __str__(self):

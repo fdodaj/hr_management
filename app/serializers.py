@@ -14,7 +14,13 @@ class CreateUserSerializer(serializers.ModelSerializer):
 class ListUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ['first_name', 'last_name', 'email', 'date_created', 'hire_date', 'role']
+
+
+class UserDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'date_created', 'hire_date', 'role']
 
 
 class UpdateUserSerializer(serializers.ModelSerializer):
@@ -33,3 +39,15 @@ class UserSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = "__all__"
+
+
+class UserPasswordSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['password']
+
+
+class UpdatePasswordSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['password']
