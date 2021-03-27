@@ -10,5 +10,6 @@ urlpatterns = [
     path('user/', include('app.urls')),
     path('department/', include('department.urls')),
     path('holiday/', include('holiday.urls')),
+    path('permission/', include('permission.urls')),
     path('', schema_view),
 ]

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'app',
     'department',
     'holiday',
+    'permission',
 ]
 
 REST_FRAMEWORK = {'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'}

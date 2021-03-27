@@ -5,13 +5,13 @@ from rest_framework import serializers
 class ListDepartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department
-        fields = '__all__'
+        fields = ['name', 'users', 'department_leader', 'date_created']
 
 
 class DepartmentDetail(serializers.ModelSerializer):
     class Meta:
         model = Department
-        fields = '__all__'
+        fields = ['name', 'users', 'department_leader', 'date_created']
 
 
 class CreateDepartmentSerializer(serializers.ModelSerializer):

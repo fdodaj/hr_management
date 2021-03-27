@@ -35,20 +35,3 @@ class User(models.Model):
 
     def delete(self, using=None, keep_parents=False):
         pass
-
-
-class Permission(models.Model):
-    STATUS = (
-        ('Pending', 'Pending'),
-        ('Denied', 'Denied'),
-        ('Accepted', 'Accepted')
-    )
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_permissions')
-    description = models.CharField(max_length=255)
-    date_created = models.DateTimeField(auto_now=True, blank=True, null=True)
-    status = models.CharField(max_length=200, choices=STATUS)
-    is_deleted = models.BooleanField(default=False)
-    date_deleted = models.BooleanField(blank=True, null=True)
-
-    def __str__(self):
-        return self.description
