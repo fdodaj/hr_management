@@ -5,39 +5,41 @@ from . import serializers
 from .models import Holiday
 
 
+# filter deleted holidays
+def get_queryset(self):
+    return Holiday.objects.filter(is_deleted=False)
+
+
+# Create Holiday
 class CreateHoliday(generics.CreateAPIView):
-    queryset = Holiday.objects.all()
     serializer_class = serializers.CreateHolidaySerializer
 
 
+# List all holidays
 class HolidayList(generics.ListAPIView):
-    queryset = Holiday.objects.all()
     serializer_class = serializers.ListHolidaySerializer
-
-    def get_queryset(self):
-        holiday = self.request.user
-        return Holiday.objects.filter(is_deleted=False)
+    queryset = get_queryset(serializers.ListHolidaySerializer)
 
 
+# Update holiday
 class UpdateHoliday(generics.UpdateAPIView):
-    queryset = Holiday.objects.all()
     serializer_class = serializers.UpdateHolidaySerializer
 
-
-class HolidayDetail(generics.RetrieveAPIView):
-    queryset = Holiday.objects.all()
-    serializer_class = serializers.HolidayDetailSerializer
-
-    def get_queryset(self):
-        user = self.request.user
+    def get_queryset(self):  # filter deleted holidays
         return Holiday.objects.filter(is_deleted=False)
 
 
-class HoldayDestroyAPIView(DestroyAPIView):
-    serializer_class = serializers.HoldaySerializer
-    permission_classes = []
-    queryset = Holiday.objects.all()
+# Get holiday by ID
+class HolidayDetail(generics.RetrieveAPIView):
+    serializer_class = serializers.HolidayDetailSerializer
+    queryset = get_queryset(serializer_class)
 
-    def perform_destroy(self, instance):
+
+# Delete holiday by id ->  soft delete
+class HolidayDestroyAPIView(DestroyAPIView):
+    serializer_class = serializers.HolidaySerializer
+    queryset = get_queryset(serializer_class)
+
+    def perform_destroy(queryset, instance):
         instance.is_deleted = True
         instance.save()
