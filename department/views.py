@@ -7,37 +7,37 @@ from . import serializers
 from .models import Department
 
 
+def get_queryset(self):
+    return Department.objects.filter(is_deleted=False)
+
+
 class ListDepartment(generics.ListAPIView):
-    queryset = Department.objects.all()
+    queryset = get_queryset(serializers.ListDepartmentSerializer)
     serializer_class = serializers.ListDepartmentSerializer
 
-    def get_queryset(self):
-        user = self.request.user
-        return Department.objects.filter(is_deleted=False)
 
-
+# create department
 class CreateDepartment(generics.CreateAPIView):
-    queryset = Department.objects.all()
+    # queryset = get_queryset(serializers.CreateDepartmentSerializer)
     serializer_class = serializers.CreateDepartmentSerializer
 
 
+# get deparment detail by ID
 class DepartmentDetail(generics.RetrieveAPIView):
-    queryset = Department.objects.all()
+    queryset = get_queryset(serializers.DepartmentDetail)
     serializer_class = serializers.DepartmentDetail
 
-    def get_queryset(self):
-        user = self.request.user
-        return Department.objects.filter(is_deleted=False)
 
-
+# update department by ID
 class UpdateDepartment(generics.UpdateAPIView):
-    queryset = Department.objects.all()
+    queryset = get_queryset(serializers.UpdateDepartmentSerializer)
     serializer_class = serializers.UpdateDepartmentSerializer
 
+
+# (soft)delete department by ID
 class DepartmentDestroyAPIView(DestroyAPIView):
     serializer_class = serializers.DepartmentSerializer
-    permission_classes = []
-    queryset = Department.objects.all()
+    queryset = get_queryset(serializers.DepartmentSerializer)
 
     def perform_destroy(self, instance):
         instance.is_deleted = True
