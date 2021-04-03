@@ -1,14 +1,38 @@
 from django.db import models
-from django.contrib.auth.models import User,AbstractUser
+from django.contrib.auth.models import User, AbstractUser
+
 
 class Employee(AbstractUser):
-    department = models.CharField(max_length=100, null=True, blank=True)
-    pto = models.IntegerField(null=True, blank=True)
+    department =        models.CharField(max_length=100, null=True, blank=True)
+    pto =               models.IntegerField(default=20)
+    is_deleted =        models.BooleanField(default=False)
+    is_superuser =      models.BooleanField(default=False)
 
-    exclude = ('groups','user_permissions')
+
+
+
+    exclude = ('groups', 'user_permissions')
 
     def __str__(self):
         return self.username
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # class Role(models.Model):
@@ -27,13 +51,13 @@ class Employee(AbstractUser):
 
 # class myUser(AbstractBaseUser):
 #     name = models.CharField(max_length=255, default='')
-    # first_name = models.CharField(max_length=50)
-    # last_name = models.CharField(max_length=50)
-    # email = models.CharField(max_length=50)
+# first_name = models.CharField(max_length=50)
+# last_name = models.CharField(max_length=50)
+# email = models.CharField(max_length=50)
 
 
-    # is_active = models.BooleanField(_('active'), default=True)
-    # avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
+# is_active = models.BooleanField(_('active'), default=True)
+# avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
 #
 # class User(models.Model):
 #     user = models.OneToOneField(User, on_delete=models.CASCADE, default='')

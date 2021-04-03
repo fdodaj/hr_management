@@ -5,43 +5,35 @@ from rest_framework.serializers import ModelSerializer
 from employee.models import Employee
 
 
-class CreateUserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Employee
-        # fields = ['first_name', 'last_name', 'username', 'email', 'password', 'role', "user_id"]
-        fields = '__all__'
-
-
+#list user serializer
 class ListUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
-        # fields = ['first_name', 'last_name', 'email', 'date_created', 'hire_date', 'role', 'id']
-        fields = '__all__'
+        fields = ['password', 'id', 'username', 'first_name', 'last_name', 'email', 'date_joined', 'department', 'pto']
 
+#user detail seializer
 class UserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
-        # fields = ['first_name', 'last_name', 'email', 'date_created', 'hire_date', 'role']
-        fields = '__all__'
+        fields = ['id', 'username', 'first_name', 'last_name', 'email', 'date_joined', 'department', 'pto']
 
+#update user serializer
 class UpdateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
-        # fields = ['first_name', 'last_name', 'password', 'role']
-        fields = '__all__'
+        fields = ['username', 'first_name', 'last_name']
 
-# class DeleteUserSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = User
-#         # fields = ['is_deleted']
-#         fields = '__all__'
+#delete user serializer
+class DeleteUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Employee
+        fields = ['is_deleted']
 
-
-
+# create user serializer
 class UserSerializer(ModelSerializer):
     class Meta:
         model = Employee
-        fields = ['email', 'username', 'password']
+        fields = ['username', 'password', 'first_name', 'last_name', 'email', 'department', ]
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
@@ -51,14 +43,14 @@ class UserSerializer(ModelSerializer):
         user.save()
         return user
 
+#get password serilizer
 class UserPasswordSerializer(ModelSerializer):
     class Meta:
         model = Employee
-        # fields = ['password']
-        fields = '__all__'
+        fields = ['password']
 
-class UpdatePasswordSerializer(ModelSerializer):
-    class Meta:
-        model = Employee
-        # fields = ['password']
-        fields = '__all__'
+#
+# class UpdatePasswordSerializer(ModelSerializer):
+#     class Meta:
+#         model = Employee
+#         fields = ['password']

@@ -1,8 +1,8 @@
 from django.urls import path
 from rest_framework.authtoken.views import obtain_auth_token
 
-from .views import ListUser, UpdateView, CreateUser, UserDetail, UserDestroyAPIView, UserPasswordView, \
-    UpdatePasswordView
+from .views import ListUser, UpdateView, CreateUser, UserDetail, UserDestroyAPIView, UserPasswordView
+#    ,UpdatePasswordView
 
 urlpatterns = [
     path('', ListUser.as_view()),
@@ -11,6 +11,6 @@ urlpatterns = [
     path('update/<int:pk>', UpdateView.as_view()),
     path('delete/<int:pk>', UserDestroyAPIView.as_view()),
     path('password/<int:pk>', UserPasswordView.as_view()),
-    path('update-pass/<int:pk>', UpdatePasswordView.as_view()),
-    path('api-token-auth/', obtain_auth_token, name='api_token_auth')
+    # path('update-pass/<int:pk>', UpdatePasswordView.as_view()),
+    path('obtain-token', obtain_auth_token, name='api_token_auth')
 ]

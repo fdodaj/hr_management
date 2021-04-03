@@ -9,8 +9,13 @@ from . import serializers
 User = get_user_model()
 
 
+def get_queryset(self):
+    return User.objects.filter(is_deleted=False)
+
+
+# Create user with authenicated password
 class CreateUser(generics.CreateAPIView):
-    queryset = User.objects.all()
+    queryset = get_queryset(serializers.UserSerializer)
     serializer_class = serializers.UserSerializer
 
     def create_user(self, username, email, password=None):
@@ -27,44 +32,35 @@ class CreateUser(generics.CreateAPIView):
         return user
 
 
+# lsit all users that are not deleted
 class ListUser(generics.ListAPIView):
-    queryset = User.objects.all()
+    queryset = get_queryset(serializers.ListUserSerializer)
     serializer_class = serializers.ListUserSerializer
 
 
+# get user with ID
 class UserDetail(RetrieveAPIView):
-    queryset = User.objects.all()
+    queryset = get_queryset(serializers.UserDetailSerializer)
     serializer_class = serializers.UserDetailSerializer
 
-    def get_queryset(self):
-        user = self.request.user
-        return User.objects.filter(is_deleted=False)
 
-
+# update user by ID
 class UpdateView(UpdateAPIView):
-    queryset = User.objects.all()
+    queryset = get_queryset(serializers.UpdateUserSerializer)
     serializer_class = serializers.UpdateUserSerializer
 
 
+# (soft)Delete an user
 class UserDestroyAPIView(DestroyAPIView):
+    queryset = get_queryset(serializers.UserSerializer)
     serializer_class = serializers.UserSerializer
-    permission_classes = []
-    queryset = User.objects.all()
 
     def perform_destroy(self, instance):
         instance.is_deleted = True
         instance.save()
 
 
+# view user password
 class UserPasswordView(RetrieveAPIView):
-    queryset = User.objects.all()
+    queryset = get_queryset(serializers.UserPasswordSerializer)
     serializer_class = serializers.UserPasswordSerializer
-
-
-class UpdatePasswordView(UpdateAPIView):
-    queryset = User.objects.all()
-    serializer_class = serializers.UpdatePasswordSerializer
-
-
-def get_queryset(self):
-    return Employee.objects.filter(is_deleted=False)
