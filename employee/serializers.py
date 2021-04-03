@@ -9,7 +9,7 @@ from employee.models import Employee
 class ListUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
-        fields = ['password', 'id', 'username', 'first_name', 'last_name', 'email', 'date_joined', 'department', 'pto']
+        fields = ['roles','password', 'id', 'username', 'first_name', 'last_name', 'email', 'date_joined', 'department', 'pto']
 
 #user detail seializer
 class UserDetailSerializer(serializers.ModelSerializer):
@@ -33,7 +33,7 @@ class DeleteUserSerializer(serializers.ModelSerializer):
 class UserSerializer(ModelSerializer):
     class Meta:
         model = Employee
-        fields = ['username', 'password', 'first_name', 'last_name', 'email', 'department', ]
+        fields = ['roles','username', 'password', 'first_name', 'last_name', 'email', 'department', ]
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):

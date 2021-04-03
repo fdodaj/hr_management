@@ -12,4 +12,5 @@ urlpatterns = [
     path('holiday/', include('holiday.urls')),
     path('permission/', include('permission.urls')),
     path('', schema_view),
+    path('role/', include('role.urls'))
 ]

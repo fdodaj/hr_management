@@ -38,10 +38,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_registration',
+    'rolepermissions',
     'employee',
     'department',
     'holiday',
     'permission',
+    'role',
 ]
 
 AUTH_USER_MODEL = 'employee.Employee'

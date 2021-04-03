@@ -5,7 +5,7 @@ from rest_framework import serializers
 class ListDepartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department
-        fields = ['name', 'department_leader', 'date_created']
+        fields = ['id','name', 'department_leader', 'date_created']
 
 #department detail serializer
 class DepartmentDetail(serializers.ModelSerializer):
