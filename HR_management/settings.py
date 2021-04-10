@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'employee',
     'department',
     'holiday',
-    'permission',
+    'request',
     'role',
 ]
 

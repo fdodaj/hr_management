@@ -1,4 +1,4 @@
-from .models import Permission
+from .models import Request
 from rest_framework import serializers
 from employee.models import Employee
 
@@ -9,30 +9,30 @@ class GetPto(serializers.ModelSerializer):
 
 
 
-class ListPermissionSerializer(serializers.ModelSerializer):
+class ListRequestSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Permission
+        model = Request
         fields = ['id','user', 'description', 'date_created', 'status']
         # fields = '__all__'
 
 
-class PermissionDetail(serializers.ModelSerializer):
+class RequestDetail(serializers.ModelSerializer):
     class Meta:
-        model = Permission
+        model = Request
         fields = ['user', 'description', 'date_created', 'status']
 
-class CreatePermissionSerializer(serializers.ModelSerializer):
+class CreateRequestSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Permission
+        model = Request
         fields = ['user', 'description']
 
-class UpdatePermissionSerializer(serializers.ModelSerializer):
+class UpdateRequestSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Permission
+        model = Request
         fields = ['status']
 
 
-class PermissionSerializer(serializers.ModelSerializer):
+class RequestSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Permission
+        model = Request
         fields = '__all__'

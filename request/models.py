@@ -2,7 +2,7 @@ from django.db import models
 from employee.models import Employee
 
 
-class Permission(models.Model):
+class Request(models.Model):
     STATUS = (
         ('Pending', 'Pending'),
         ('Denied', 'Denied'),

@@ -10,7 +10,7 @@ urlpatterns = [
     path('user/', include('employee.urls')),
     path('department/', include('department.urls')),
     path('holiday/', include('holiday.urls')),
-    path('permission/', include('permission.urls')),
+    path('request/', include('request.urls')),
     path('', schema_view),
     path('role/', include('role.urls'))
 ]
