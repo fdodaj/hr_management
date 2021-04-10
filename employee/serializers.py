@@ -49,6 +49,11 @@ class UserPasswordSerializer(ModelSerializer):
         model = Employee
         fields = ['password']
 
+class UserSerializer(ModelSerializer):
+    class Meta:
+        model= Employee
+        fields = ['roles','username', 'password', 'first_name', 'last_name', 'email', 'department', ]
+
 #
 # class UpdatePasswordSerializer(ModelSerializer):
 #     class Meta:

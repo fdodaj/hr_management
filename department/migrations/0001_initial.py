@@ -12,12 +12,11 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Role',
+            name='Department',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(default='', max_length=30)),
-                ('description', models.CharField(default='', max_length=255)),
-                ('created', models.DateTimeField(auto_now_add=True)),
+                ('name', models.CharField(max_length=255)),
+                ('date_created', models.DateField(auto_now=True)),
                 ('is_deleted', models.BooleanField(default=False)),
             ],
         ),

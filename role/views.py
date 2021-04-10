@@ -32,3 +32,5 @@ class UpdateRole(generics.UpdateAPIView):
 class RoleDetail(generics.RetrieveAPIView):
     serializer_class = serializers.RoleDetailSerializer
     queryset = get_queryset(serializers.RoleDetailSerializer)
+
+

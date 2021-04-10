@@ -51,6 +51,8 @@ AUTH_USER_MODEL = 'employee.Employee'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+
     ],
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
@@ -61,6 +63,7 @@ REST_REGISTRATION = {
     'REGISTER_EMAIL_VERIFICATION_ENABLED': False,
     'RESET_PASSWORD_VERIFICATION_ENABLED': False,
 }
+
 
 APPEND_SLASH = False
 
