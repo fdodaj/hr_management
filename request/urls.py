@@ -8,5 +8,5 @@ urlpatterns = [
     path('<int:pk>', views.RequestDetail.as_view()),
     path('update/<int:pk>', views.UpdateRequest.as_view()),
     path('<int:pk>', views.RequestDestroyAPIView.as_view()),
-    # path('pto/<int:pk>', views.GetPto.as_view())
+    # path('date/<int:pk>', views.GetDate.as_view())
 ]

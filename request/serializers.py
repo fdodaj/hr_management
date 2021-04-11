@@ -1,18 +1,21 @@
 from .models import Request
 from rest_framework import serializers
 from employee.models import Employee
+from holiday.models import Holiday
 
-class GetPto(serializers.ModelSerializer):
+
+
+class GetDate(serializers.ModelSerializer):
     class Meta:
-        model = Employee
-        fields = ['pto']
+        model = Holiday
+        fields = ['date']
 
 
 
 class ListRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Request
-        fields = ['id','user', 'description', 'date_created', 'status']
+        fields = ['id','user', 'description', 'date_created', 'status', 'date']
         # fields = '__all__'
 
 
@@ -24,12 +27,12 @@ class RequestDetail(serializers.ModelSerializer):
 class CreateRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Request
-        fields = ['user', 'description']
+        fields = ['user', 'description','date']
 
 class UpdateRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Request
-        fields = ['status']
+        fields = ['status' ]
 
 
 class RequestSerializer(serializers.ModelSerializer):

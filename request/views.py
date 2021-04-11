@@ -2,18 +2,19 @@ from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.generics import DestroyAPIView
 from employee.models import Employee
-from django.http import JsonResponse
-
-
+from holiday.models import Holiday
+from django.http import JsonResponse, HttpResponse
+import datetime
 
 from . import serializers
 # from django.contrib.auth.models import User
 from .models import Request
 
 
-class GetPto(generics.RetrieveAPIView):
-    queryset = Employee.objects.all()
-    serializer_class = serializers.GetPto
+#
+# class GetPto(generics.RetrieveAPIView):
+#     queryset = Employee.objects.all()
+#     serializer_class = serializers.GetPto
 
 
 def get_queryset(self):
@@ -33,6 +34,7 @@ class RequestDetail(generics.RetrieveAPIView):
     queryset = get_queryset(serializers.RequestDetail)
     serializer_class = serializers.RequestDetail
 
+
 #
 class UpdateRequest(generics.UpdateAPIView):
     queryset = get_queryset(serializers.UpdateRequestSerializer)
@@ -41,15 +43,23 @@ class UpdateRequest(generics.UpdateAPIView):
     def update(self, request, *args, **kwargs):
         new_status = request.data.get('status')
         id = kwargs['pk']
-        obj = Request.objects.get(id=id) # objekti qe merr nga databaza
+        obj = Request.objects.get(id=id)  # objekti qe merr nga databaza
 
+        # check if request date is holiday
+        if Holiday.objects.filter(date=obj.date).count() > 0:
+            return JsonResponse("It is holiday. Error creating request", safe=False)
+
+        # check if request date in weekend
+        if obj.date.weekday() < 5:
+            return JsonResponse("It is weekend. Error creating request", safe=False)
 
         if obj.status == new_status:
-            return
+            return JsonResponse("You did that once", safe=False)
 
         if new_status == "Accepted":
+
             if obj.user.pto < 1:
-                 return JsonResponse("You don't have any PTO left",safe = False)
+                return JsonResponse("You don't have any PTO left", safe=False)
             else:
                 obj.user.pto -= 1
                 obj.user.save()
@@ -60,6 +70,7 @@ class UpdateRequest(generics.UpdateAPIView):
         else:
             return JsonResponse("Enter a valid status,", safe=False)
 
+
 class RequestDestroyAPIView(DestroyAPIView):
     queryset = get_queryset(serializers.RequestSerializer)
     serializer_class = serializers.RequestSerializer
@@ -67,4 +78,3 @@ class RequestDestroyAPIView(DestroyAPIView):
     def perform_destroy(self, instance):
         instance.is_deleted = True
         instance.save()
-
